@@ -9,6 +9,8 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
+# Report puma metrics to statsd
+gem "puma-plugin-statsd"
 # HTTP requests client
 gem 'rest-client', '~>2.1.0'
 # Use SCSS for stylesheets

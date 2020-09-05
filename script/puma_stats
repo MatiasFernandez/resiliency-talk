@@ -1,0 +1,2 @@
+#!/bin/bash
+watch -n 0.5 --color "curl -s http://127.0.0.1:9293/stats | jq -C '. | {total_threads: .running, available: .pool_capacity, backlog: .backlog, capacity: (.pool_capacity / .running * 100)}'"

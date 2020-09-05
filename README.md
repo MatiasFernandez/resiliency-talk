@@ -1,24 +1,18 @@
-# README
+## Useful commands
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Monitor with CLI
 
-Things you may want to cover:
+```bash
+rails s
+script/puma_stats
+```
 
-* Ruby version
 
-* System dependencies
+### Monitor with StatsD
 
-* Configuration
+```bash
+ruby script/statsd_server.rb
+STATSD_HOST=127.0.0.1 rails s
+```
 
-* Database creation
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
