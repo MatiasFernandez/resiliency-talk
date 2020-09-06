@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
-  get 'affected', controller: 'application'
-  get 'unaffected', controller: 'application'
+  get 'slow_calc', controller: 'application'
+  get 'slow_request', controller: 'application'
+  get 'noop', controller: 'application'
 end

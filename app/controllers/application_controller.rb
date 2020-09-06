@@ -1,15 +1,23 @@
 class ApplicationController < ActionController::Base
-  def affected
-    log 'Procesando /affected'
-    log_around('Request HTPP') do
+  def slow_request
+    log_around('Request HTTP Lenta') do
       RestClient.get('localhost:8080/slow')
     end
-    render json: { success: true, thread: Thread.current.object_id }
+    render_response
   end
 
-  def unaffected
-    log 'Procesando /unaffected'
-    render json: { success: true, thread: Thread.current.object_id }
+  def noop
+    log_around('Operacion nula') do
+      # Do nothing
+    end
+    render_response
+  end
+
+  def slow_calc
+    log_around('Operación matemática lenta') do
+      expensive_calculation
+    end
+    render_response
   end
 
   private
@@ -19,8 +27,20 @@ class ApplicationController < ActionController::Base
   end
 
   def log_around(message)
-    log "ANTES DE #{message}"
+    log "Iniciando <#{message}>"
     yield
-    log "DESPUES DE #{message}"
+    log "<#{message}> finalizada"
+  end
+
+  def expensive_calculation
+    100.times do |i|
+      1000000.downto(1) do |j|
+        Math.sqrt(j) * i / 0.2
+      end
+    end
+  end
+
+  def render_response
+    render json: { thread: Thread.current.object_id }
   end
 end
