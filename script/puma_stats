@@ -1,2 +1,2 @@
 #!/bin/bash
-watch -n 0.5 --color "curl -s http://127.0.0.1:9293/stats | jq -C '. | {total_threads: .running, available: .pool_capacity, backlog: .backlog, capacity: (.pool_capacity / .running * 100)}'"
+watch -n 0.5 --color "curl -s http://127.0.0.1:9293/stats | jq -C 'if has(\"workers\") then ( .worker_status | map(.last_status | {total_threads: .running, available: .pool_capacity, capacity: (.pool_capacity / .running * 100)}) ) else ( {total_threads: .running, available: .pool_capacity, capacity: (.pool_capacity / .running * 100)} ) end'"
