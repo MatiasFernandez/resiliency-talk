@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
       RestClient::Request.execute(method: :get, url: 'localhost:8080/slow', timeout: 6)
     end
     render_successful_response
-    rescue RestClient::Exceptions::ReadTimeout => error
+    rescue StandardError => error
       render_error_response(error)
   end
 
@@ -48,6 +48,6 @@ class ApplicationController < ActionController::Base
   end
 
   def render_error_response(error)
-    render json: { success: false, error: error.message, thread: Thread.current.object_id }
+    render status: :service_unavailable, json: { success: false, error: error.message, thread: Thread.current.object_id }
   end
 end
