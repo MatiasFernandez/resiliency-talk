@@ -9,3 +9,13 @@ if ENV['CIRCUIT_BREAKER'] == 'true'
     }
   end
 end
+
+if ENV['BULKHEAD'] == 'true'
+  Semian::NetHTTP.semian_configuration = proc do
+    {
+      tickets: 1,
+      circuit_breaker: false,
+      name: "circuit_breaker"
+    }
+  end
+end

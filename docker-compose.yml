@@ -14,6 +14,8 @@ services:
     environment:
       RAILS_ENV: development
       REMOTE_SERVICE_HOST: "host.docker.internal"
+      BULKHEAD: "true"
+      WORKERS: 2
 
 volumes:
   gem_cache:
