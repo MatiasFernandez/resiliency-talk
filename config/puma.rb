@@ -19,7 +19,7 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 
 # Enable control and monitoring endpoint
-activate_control_app 'tcp://127.0.0.1:9293', { no_token: true }
+activate_control_app 'tcp://0.0.0.0:9293', { no_token: true }
 
 # Create state file to use for monitoring with pumactl
 state_path 'tmp/puma.state'
