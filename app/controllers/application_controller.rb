@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
       RestClient::Request.execute(method: :get, url: remote_service_url, timeout: 6)
     end
     render_successful_response
-    rescue StandardError => error
-      render_error_response(error)
+  rescue StandardError => error
+    render_error_response(error)
   end
 
   def noop
@@ -48,7 +48,7 @@ class ApplicationController < ActionController::Base
   end
 
   def render_error_response(error)
-    render status: :service_unavailable, json: { success: false, error: error.message, thread: Thread.current.object_id }
+    render status: :service_unavailable, json: { success: false, error: error.message, error_class: error.class.to_s, thread: Thread.current.object_id }
   end
 
   def remote_service_url
